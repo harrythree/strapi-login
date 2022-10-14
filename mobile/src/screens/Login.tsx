@@ -2,10 +2,25 @@ import React from "react";
 import { SafeAreaView, StyleSheet, TextInput, Alert } from "react-native";
 
 import Button from "../components/Button";
+import login from "../utils/login";
 
 const Login = () => {
   const [identifier, onChangeIdentifier] = React.useState("");
   const [password, onChangePassword] = React.useState("");
+
+  const onPress = async () => {
+    try {
+      const body = {
+        identifier,
+        password,
+      };
+
+      const res = await login(body);
+      Alert.alert(JSON.stringify(res));
+    } catch (err) {
+      Alert.alert("Error", err.message);
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -22,7 +37,7 @@ const Login = () => {
         placeholder="Password"
         secureTextEntry
       />
-      <Button title="Login" onPress={() => Alert.alert(identifier, password)} />
+      <Button title="Login" onPress={onPress} />
     </SafeAreaView>
   );
 };
