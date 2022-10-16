@@ -1,9 +1,14 @@
-import React from "react";
+import * as React from "react";
 
-import Login from "./src/screens/Login";
+import { AuthProvider } from "./src/hooks/useAuth";
+import Navigation from "./src/components/Navigation";
 
 const App = () => {
-  return <Login />;
+  return (
+    <AuthProvider>
+      <Navigation />
+    </AuthProvider>
+  );
 };
 
 export default App;
